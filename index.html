@@ -33,9 +33,36 @@
 
 
         <section class="page" id="settings" hidden>
-            <h1>Settings</h1>
-            <p>Dark mode, currency and language.</p>
-        </section>
+              <h1>Settings</h1>
+
+            <div class="setting-row">
+              <label for="darkMode">Dark mode</label>
+              <!-- From Uiverse.io by [author] -->
+              <label class="switch">
+            <input type="checkbox" id="darkMode">
+            <span class="slider"></span>
+           </label>
+          </div>
+
+          <div class="setting-row">
+        <label for="language">Language</label>
+        <select id="language">
+            <option>ENG</option>
+            <option>ES</option>
+        </select>
+     </div>
+
+      <div class="setting-row">
+        <label for="currency">Currency</label>
+        <select id="currency">
+            <option>NZD</option>
+            <option>AUD</option>
+            <option>USD</option>
+        </select>
+        </div>
+        
+    </section>
+    
 
     </main>
 
