@@ -211,3 +211,51 @@ main {
     outline: 3px solid #fff;
     outline-offset: 2px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 414px) {
+    body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  main {
+    width: 100%;
+    max-width: 100vw;
+    padding-left: 1rem;   
+    padding-right: 1rem;
+  }
+
+  
+  h1, .main-title {
+    font-size: 1.75rem ; 
+    word-wrap: break-word;
+  }
+
+  .menu {
+    width: calc(100% - 32px); 
+    max-width: 100%;
+    gap: 4px;                
+  }
+
+}
