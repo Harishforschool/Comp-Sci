@@ -5,6 +5,13 @@
     var i = document.getElementById('file');
     var table = document.getElementById('table');
 
+    var CATEGORIES = {
+        "Transport": ["at public tr", "uber", "bus", "train"],
+        "Food": ["bakery", "lunch", "vending dire", "snack", "spiceland", "food"],
+        "Tuck shop": ["sk college c", "school"],
+        "Entertainment": ["hoyts sylvia", "movie"]
+    };
+
     if (!i) {
         return;
     }
@@ -34,7 +41,6 @@
             return;
         }
 
-        // clear table
         while (!!table.lastElementChild) {
             table.removeChild(table.lastElementChild);
         }
@@ -55,9 +61,15 @@
             htr.appendChild(th);
         });
 
+        var catHeader = document.createElement('th');
+        catHeader.textContent = "Category";
+        htr.appendChild(catHeader);
+
         table.appendChild(htr);
 
         var rtr;
+
+        var categoryTotals = { "Transport": 0, "Food": 0, "Tuck shop": 0, "Entertainment": 0, "Other": 0 };
 
         rows.forEach(function (r) {
             r = r.trim();
@@ -74,15 +86,52 @@
 
             rtr = document.createElement('tr');
 
-            cols.forEach(function (c) {
-                var td = document.createElement('td');
-                var tc = c.trim();
+            var matchedCategory = "Other";
+            var rowAmount = 0;
+            
+            var rowTextToScan = ""; 
 
-                td.textContent = tc.replace(qRegex, '');
+            cols.forEach(function (c, index) {
+                var td = document.createElement('td');
+                var tc = c.trim().replace(qRegex, '');
+
+                td.textContent = tc;
                 rtr.appendChild(td);
+
+                if (index === 2 || index === 3) {
+                    rowTextToScan += " " + tc.toLowerCase();
+                }
+
+                // Safely grab the Amount from Index 5
+                if (index === 5) {
+                    var parsed = parseFloat(tc);
+                    if (!isNaN(parsed)) {
+                        rowAmount = parsed;
+                    }
+                }
             });
 
+            for (var cat in CATEGORIES) {
+                if (CATEGORIES.hasOwnProperty(cat)) {
+                    var keywords = CATEGORIES[cat];
+                    for (var k = 0; k < keywords.length; k++) {
+                        if (rowTextToScan.indexOf(keywords[k]) !== -1) {
+                            matchedCategory = cat;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            var catTd = document.createElement('td');
+            catTd.textContent = matchedCategory;
+            rtr.appendChild(catTd);
+
             table.appendChild(rtr);
+
+            categoryTotals[matchedCategory] += rowAmount;
         });
+
+        console.log("Final Calculated Totals:", categoryTotals);
     }
 })();
