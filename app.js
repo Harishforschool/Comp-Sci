@@ -61,6 +61,11 @@
             htr.appendChild(th);
         });
 
+        // Added Type header column
+        var typeHeader = document.createElement('th');
+        typeHeader.textContent = "Type";
+        htr.appendChild(typeHeader);
+
         var catHeader = document.createElement('th');
         catHeader.textContent = "Category";
         htr.appendChild(catHeader);
@@ -88,6 +93,7 @@
 
             var matchedCategory = "Other";
             var rowAmount = 0;
+            var transType = "Unknown";
             
             var rowTextToScan = ""; 
 
@@ -102,7 +108,6 @@
                     rowTextToScan += " " + tc.toLowerCase();
                 }
 
-                // Safely grab the Amount from Index 5
                 if (index === 5) {
                     var parsed = parseFloat(tc);
                     if (!isNaN(parsed)) {
@@ -111,25 +116,35 @@
                 }
             });
 
-            for (var cat in CATEGORIES) {
-                if (CATEGORIES.hasOwnProperty(cat)) {
-                    var keywords = CATEGORIES[cat];
-                    for (var k = 0; k < keywords.length; k++) {
-                        if (rowTextToScan.indexOf(keywords[k]) !== -1) {
-                            matchedCategory = cat;
-                            break;
+            if (rowAmount < 0) {
+                transType = "Debit (Out)";
+                for (var cat in CATEGORIES) {
+                    if (CATEGORIES.hasOwnProperty(cat)) {
+                        var keywords = CATEGORIES[cat];
+                        for (var k = 0; k < keywords.length; k++) {
+                            if (rowTextToScan.indexOf(keywords[k]) !== -1) {
+                                matchedCategory = cat;
+                                break;
+                            }
                         }
                     }
                 }
+                categoryTotals[matchedCategory] += rowAmount;
+            } else {
+                transType = "Credit (In)";
+                matchedCategory = "Income";
             }
+
+            // Added Type cell to the row column
+            var typeTd = document.createElement('td');
+            typeTd.textContent = transType;
+            rtr.appendChild(typeTd);
 
             var catTd = document.createElement('td');
             catTd.textContent = matchedCategory;
             rtr.appendChild(catTd);
 
             table.appendChild(rtr);
-
-            categoryTotals[matchedCategory] += rowAmount;
         });
 
         console.log("Final Calculated Totals:", categoryTotals);
