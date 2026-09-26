@@ -147,6 +147,40 @@
             table.appendChild(rtr);
         });
 
-        console.log("Final Calculated Totals:", categoryTotals);
+        drawChart(categoryTotals);
     }
 })();
+
+function drawChart(categoryTotals) {
+    google.charts.setOnLoadCallback(function () {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Category', 'Amount'],
+            ['Transport', Math.abs(categoryTotals["Transport"])],
+            ['Food', Math.abs(categoryTotals["Food"])],
+            ['Tuck shop', Math.abs(categoryTotals["Tuck shop"])],
+            ['Entertainment', Math.abs(categoryTotals["Entertainment"])],
+            ['Other', Math.abs(categoryTotals["Other"])]
+        ]);
+
+        var options = {
+            title: 'Where Your Money Goes',
+            pieHole: 0.4,
+            backgroundColor: 'transparent',
+            legend: {
+                textStyle: {
+                    color: 'white'
+                }
+            },
+            titleTextStyle: {
+                color: 'white'
+            }
+        };
+
+        var chart = new google.visualization.PieChart(
+            document.getElementById('chart_div')
+        );
+
+        chart.draw(data, options);
+    });
+}
