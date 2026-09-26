@@ -193,3 +193,5 @@ function drawChart(categoryTotals) {
         chart.draw(data, options);
     });
 }
+
+

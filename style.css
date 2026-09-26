@@ -28,11 +28,9 @@ box-sizing: border-box;
     border: none;
     cursor: pointer;
     border-radius: 8px;
-    width: 200px;
-    height: 70px;
     text-align: center;
-    line-height: 35px;
     transition: 0.3s;
+    padding: 10px 14px;
 }
 
 .button:hover {
@@ -329,4 +327,27 @@ main {
 
 }
 
+#table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
+#table th,
+#table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+#table th {
+    background-color: #4267BB;
+    color: white;
+}
+
+#table tr {
+    background-color: #1f2937;
+    color: white;
+}
