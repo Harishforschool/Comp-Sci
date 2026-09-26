@@ -11,13 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
 
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <script>
-        google.charts.load("current", {
-            packages: ["corechart"]
-        });
-    </script>
 </head>
 
 <body>
@@ -25,11 +19,10 @@
     <main>
         <section class="page" id="search">
             <h1>Search</h1>
-            <input type="file" id="file">
-            <div id="fileStatus" hidden></div>
-            <table id="table"></table>
-            <div id="chart_div" style="width: 100%; height: 400px;"></div>
-
+            
+           
+            
+           
         </section>
     </main>
 
@@ -57,29 +50,6 @@
         </a>
     </div>
 
-    <script src="app.js"></script>
-
-    <script>
-        document.getElementById('file').addEventListener('change', e => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-
-            reader.onload = () => {
-                const rows = reader.result.trim().split(/\r?\n/);
-                showFile(file.name, rows.length - 1);
-            };
-
-            reader.readAsText(file);
-        });
-
-        function showFile(name, count) {
-            const box = document.getElementById('fileStatus');
-            box.hidden = false;
-            box.innerHTML = '<b>' + name + '</b><br>' + count + ' transactions loaded';
-        }
-    </script>
 
 </body>
 </html>
