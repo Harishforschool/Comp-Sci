@@ -17,10 +17,19 @@
     }
 
     i.addEventListener('change', function () {
-        if (!!i.files && i.files.length > 0) {
-            parseCSV(i.files[0]);
+    if (!!i.files && i.files.length > 0) {
+
+        var file = i.files[0];
+
+        if (!file.name.toLowerCase().endsWith('.csv')) {
+            alert("Please upload a CSV file.");
+            i.value = "";
+            return;
         }
-    });
+
+        parseCSV(file);
+    }
+});
 
     function parseCSV(file) {
         if (!file || !FileReader) {
