@@ -20,18 +20,18 @@ box-sizing: border-box;
 #tutorial-toggle {
     display: none;
 }
+
 .button {
-    display: block;
+    display: inline-block;
     background-color: #f3f7fe;
     color: #3b82f6;
     border: none;
     cursor: pointer;
     border-radius: 8px;
-    width: fit-content;
-    padding: 12px 18px;
+    width: 200px;
+    height: 70px;
     text-align: center;
-    line-height: normal;
-    margin-bottom: 1rem;
+    line-height: 35px;
     transition: 0.3s;
 }
 
